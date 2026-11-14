@@ -244,6 +244,19 @@
       color: var(--text);
     }
 
+    .text-button {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      padding: 0.2rem 0.15rem;
+      cursor: pointer;
+    }
+
+    .text-button:hover { color: var(--text); }
+    .food-extra .text-button { margin-left: 0.75rem; }
+    .food-extra .meal-choices, .add-meals { margin-top: 0.85rem; }
+    .add-meals p { margin: 0 0 0.45rem; }
+
     .content {
       width: min(1120px, calc(100% - 2.5rem));
       margin: 0 auto;
@@ -257,6 +270,108 @@
       align-items: start;
     }
 
+    .diary-side {
+      display: grid;
+      gap: 0.9rem;
+      align-content: start;
+      position: sticky;
+      top: 5.4rem;
+      max-height: calc(100vh - 6.5rem);
+      overflow: auto;
+    }
+
+    .side-calendar {
+      padding: 0.85rem 0.8rem 0.75rem;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .side-cal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.35rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .side-cal-head h2 {
+      margin: 0;
+      font-size: 0.98rem;
+      font-weight: 650;
+      letter-spacing: -0.02em;
+    }
+
+    .side-cal-nav { display: flex; gap: 0.25rem; }
+    .side-cal-nav .ghost { padding: 0.25rem 0.5rem; }
+
+    .side-cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 0.12rem;
+    }
+
+    .side-cal-weekday {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.68rem;
+      font-weight: 650;
+      letter-spacing: 0.04em;
+      padding-bottom: 0.2rem;
+    }
+
+    .side-day {
+      display: grid;
+      justify-items: center;
+      align-content: center;
+      gap: 0.08rem;
+      min-height: 2.2rem;
+      padding: 0.12rem 0 0.16rem;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      background: transparent;
+      color: inherit;
+      font-variant-numeric: tabular-nums;
+      line-height: 1;
+    }
+
+    .side-day.is-outside { color: var(--muted); opacity: 0.45; }
+    .side-day.is-tracked:not(.is-selected) {
+      background: color-mix(in srgb, var(--accent) 14%, transparent);
+    }
+    .side-day.is-today:not(.is-selected) { color: var(--accent); font-weight: 700; }
+    .side-day.is-selected {
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .side-dot {
+      width: 0.32rem;
+      height: 0.32rem;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .side-day:not(.is-tracked) .side-dot { visibility: hidden; }
+
+    .side-cal-key {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin: 0.55rem 0 0;
+      color: var(--muted);
+      font-size: 0.75rem;
+    }
+
+    .side-cal-key i {
+      width: 0.38rem;
+      height: 0.38rem;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
     .day-heading { margin: 0 0 1rem; }
     .day-heading h1, .page-heading h1 {
       margin: 0;
@@ -265,7 +380,7 @@
     }
     .day-heading p, .lede { margin: 0.25rem 0 0; color: var(--muted); }
 
-    .meal-card, .preview-card, .goal-card, .week-day, .food-card, #meal-summary {
+    .meal-card, .preview-card, .goal-card, .week-day, .food-card, #meal-summary, #recipe-totals {
       background: var(--card);
       border: 1px solid var(--card-border);
       border-radius: var(--radius);
@@ -304,6 +419,73 @@
     }
 
     .entry h3, .food-card h3, .preview-head h2 { margin: 0; font-size: 1rem; }
+
+    .log-line {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto auto;
+      gap: 0.65rem 1rem;
+      align-items: center;
+    }
+
+    .log-amount, .log-kcal { font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .log-amount { color: var(--muted); font-size: 0.92rem; }
+    .log-kcal { font-weight: 700; }
+    .log-kcal.burn { color: var(--protein); }
+
+    .exercise-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 0.85rem;
+      align-items: end;
+    }
+
+    .exercise-form input[type="text"] { flex: 1 1 12rem; }
+    .exercise-form input[type="number"] { width: 7.5rem; }
+    .meal-card.exercise { box-shadow: inset 3px 0 0 var(--protein), var(--shadow); }
+
+    .nutrient-board {
+      margin-top: 1.25rem;
+      padding: 1.15rem 1.2rem 1.25rem;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .nutrient-board h2 {
+      margin: 0 0 0.85rem;
+      font-size: 1.05rem;
+    }
+
+    .nutrient-columns {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem 1.25rem;
+    }
+
+    .nutrient-columns h3 {
+      margin: 0 0 0.45rem;
+      font-size: 0.75rem;
+      font-weight: 650;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .nutrient-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.32rem 0;
+      border-top: 1px solid var(--card-border);
+      font-size: 0.92rem;
+    }
+
+    .nutrient-line strong {
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
     .muted { color: var(--muted); margin: 0.15rem 0 0; font-size: 0.92rem; }
 
     .entry-controls, .preview-controls, .goal-grid {
@@ -363,7 +545,7 @@
       padding: 0.28rem 0;
     }
 
-    #meal-summary {
+    #meal-summary, #recipe-totals {
       position: sticky;
       top: 5.4rem;
       padding: 1.15rem 1.15rem 1rem;
@@ -371,7 +553,14 @@
       overflow: auto;
     }
 
-    #meal-summary h2 {
+    .diary-side #meal-summary {
+      position: static;
+      top: auto;
+      max-height: none;
+      overflow: visible;
+    }
+
+    #meal-summary h2, #recipe-totals h2 {
       margin: 0;
       font-size: 0.78rem;
       letter-spacing: 0.08em;
@@ -471,6 +660,76 @@
     }
     .week-summary strong { color: var(--text); }
 
+    .month-board {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 0.45rem;
+    }
+
+    .month-weekday {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 650;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0 0.15rem 0.15rem;
+    }
+
+    .month-day {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.35rem;
+      min-height: 5.5rem;
+      padding: 0.55rem 0.55rem 0.5rem;
+      text-align: left;
+      color: inherit;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+
+    .month-day.is-outside {
+      opacity: 0.4;
+      box-shadow: none;
+    }
+
+    .month-day.is-selected { border-color: var(--accent); }
+
+    .month-num {
+      display: inline-grid;
+      place-items: center;
+      min-width: 1.65rem;
+      height: 1.65rem;
+      border-radius: 999px;
+      font-weight: 650;
+      font-variant-numeric: tabular-nums;
+      line-height: 1;
+    }
+
+    .month-day.is-today .month-num {
+      background: color-mix(in srgb, var(--accent) 22%, transparent);
+      color: var(--accent);
+    }
+
+    .month-kcal {
+      min-height: 1rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-variant-numeric: tabular-nums;
+      line-height: 1.2;
+    }
+
+    .month-mark {
+      width: 0.45rem;
+      height: 0.45rem;
+      margin-top: auto;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
     .food-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -546,7 +805,19 @@
     }
 
     .goal-card { padding: 1.1rem 1.15rem 1.2rem; max-width: 46rem; }
+    .goal-card + .goal-card { margin-top: 1rem; }
+    .goal-card h2 { margin: 0; font-size: 1.05rem; }
     .goal-grid label input { width: 8rem; }
+    .goal-grid select { width: 11rem; }
+    .unit-field { display: flex; gap: 0.4rem; align-items: center; }
+    .unit-field input { width: 6.2rem; }
+    .unit-field select { width: 4.6rem; }
+    .bmr-actions { display: flex; align-items: end; }
+    .bmr-result {
+      margin: 0.9rem 0 0;
+      font-variant-numeric: tabular-nums;
+      font-weight: 650;
+    }
 
     .status-line { min-height: 1.25rem; color: var(--muted); margin: 0 0 0.8rem; }
     .toast {
@@ -554,6 +825,9 @@
       right: 1rem;
       bottom: 1rem;
       z-index: 40;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
       padding: 0.75rem 0.95rem;
       background: var(--card);
       border: 1px solid var(--card-border);
@@ -561,11 +835,80 @@
       box-shadow: var(--shadow);
     }
     .toast:empty { display: none; }
+    .toast .ghost { padding: 0.3rem 0.7rem; }
+
+    .day-heading { display: flex; justify-content: space-between; align-items: end; gap: 0.8rem; flex-wrap: wrap; }
+    .day-tools { display: flex; gap: 0.45rem; }
+    .file-label { position: relative; cursor: pointer; }
+    .file-label input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .recent-foods {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 0.8rem;
+    }
+
+    .nutrient-board summary { cursor: pointer; }
+    .nutrient-board summary h2 { display: inline; margin: 0; }
+    .nutrient-board-details[open] summary { margin-bottom: 0.85rem; }
+
+    .recipe-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 280px;
+      gap: 1.25rem;
+      align-items: start;
+    }
+
+    .recipe-results { margin-top: 0.9rem; }
+    .recipe-line {
+      margin-top: 0.85rem;
+      padding-top: 0.85rem;
+      border-top: 1px solid var(--card-border);
+    }
+    .recipe-line h3 { margin: 0; font-size: 1rem; }
+    .recipe-save { margin-top: 1rem; }
+    .recipe-save input[type="text"] { flex: 1 1 14rem; }
+    .saved-recipes { margin-top: 1.25rem; }
+    .recipe-list { display: grid; gap: 0.8rem; margin-top: 0.85rem; }
+    .recipe-ingredients { margin: 0.75rem 0 0; padding: 0; list-style: none; }
+    .recipe-ingredients li {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.32rem 0;
+      border-top: 1px solid var(--card-border);
+      font-size: 0.92rem;
+    }
+    .recipe-ingredients span { color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
 
     @media (max-width: 1100px) {
-      .diary-layout, .week-grid { grid-template-columns: 1fr; }
-      #meal-summary { position: static; max-height: none; }
+      .diary-layout, .recipe-layout, .week-grid { grid-template-columns: 1fr; }
+      .diary-layout { display: flex; flex-direction: column; align-items: stretch; }
+      .diary-side { display: contents; position: static; max-height: none; overflow: visible; }
+      .side-calendar { order: -1; }
+      #meal-summary, #recipe-totals { position: static; max-height: none; }
       .week-day { min-height: 0; }
+    }
+
+    @media (max-width: 700px) {
+      .month-board { gap: 0.28rem; }
+      .month-weekday { font-size: 0.62rem; letter-spacing: 0.02em; }
+      .month-day {
+        min-height: 4.15rem;
+        padding: 0.35rem 0.25rem 0.3rem;
+        align-items: center;
+        border-radius: 10px;
+        gap: 0.2rem;
+      }
+      .month-kcal { font-size: 0.65rem; text-align: center; }
+      .month-num { min-width: 1.4rem; height: 1.4rem; font-size: 0.85rem; }
+      .nutrient-columns { grid-template-columns: 1fr; }
     }
 
     @media (min-width: 900px) {
@@ -593,6 +936,16 @@
       }
       #menu-button { display: inline-grid; }
       .content { width: min(1120px, calc(100% - 1.5rem)); }
+      .topbar { align-items: stretch; padding: 0.7rem 0.75rem; }
+      .date-nav, .search-form { width: 100%; }
+      .date-nav input[type="date"] { flex: 1; min-width: 0; }
+      .search-form { flex-wrap: wrap; }
+      .search-form input[type="search"] { flex: 1 1 12rem; min-width: 0; }
+      .search-form select { flex: 1 1 8rem; }
+      .log-line { grid-template-columns: minmax(0, 1fr) auto; }
+      .log-line > div { grid-column: 1 / -1; }
+      .exercise-row { grid-template-columns: minmax(0, 1fr) auto auto; }
+      .exercise-row > div { grid-column: auto; }
     }
   </style>
 </head>
@@ -641,6 +994,7 @@
           </button>
           <div class="nav-sub">
             <button type="button" class="nav-link" data-view="week">Week</button>
+            <button type="button" class="nav-link" data-view="month">Month</button>
           </div>
         </div>
 
@@ -661,6 +1015,7 @@
           </button>
           <div class="nav-sub">
             <button type="button" class="nav-link" data-view="search">Search Foods</button>
+            <button type="button" class="nav-link" data-view="recipes">Recipes</button>
           </div>
         </div>
 
@@ -716,15 +1071,27 @@
       <main class="content">
         <section id="view-diary" data-view-panel="diary">
           <div class="diary-layout">
-            <div>
+            <div class="diary-main">
               <div class="day-heading">
-                <h1 id="day-title">Diary</h1>
-                <p id="day-stats"></p>
+                <div>
+                  <h1 id="day-title">Diary</h1>
+                  <p id="day-stats"></p>
+                </div>
+                <div class="day-tools">
+                  <button type="button" class="ghost" id="export-data">Export</button>
+                  <label class="ghost file-label">Import
+                    <input id="import-data" type="file" accept="application/json,.json">
+                  </label>
+                </div>
               </div>
               <div id="meal-list"></div>
             </div>
-            <aside id="meal-summary" aria-label="Daily totals"></aside>
+            <div class="diary-side">
+              <aside id="diary-calendar" class="side-calendar" aria-label="Tracked days"></aside>
+              <aside id="meal-summary" aria-label="Daily totals"></aside>
+            </div>
           </div>
+          <section id="nutrient-board" class="nutrient-board" aria-label="Vitamins, minerals, and nutrients"></section>
         </section>
 
         <section id="view-week" data-view-panel="week" hidden>
@@ -739,23 +1106,119 @@
           <div class="week-grid" id="week-board"></div>
         </section>
 
+        <section id="view-month" data-view-panel="month" hidden>
+          <div class="page-heading">
+            <h1 id="month-title">Month</h1>
+            <div class="week-nav">
+              <button type="button" class="ghost" id="month-prev">Previous month</button>
+              <button type="button" class="ghost" id="month-next">Next month</button>
+            </div>
+          </div>
+          <div class="week-summary" id="month-summary"></div>
+          <div class="month-board" id="month-board" aria-label="Month calendar"></div>
+        </section>
+
         <section id="view-search" data-view-panel="search" hidden>
           <div class="page-heading">
             <h1>Search Foods</h1>
             <p class="lede" id="search-context"></p>
-            <div class="meal-choices" id="meal-choices"></div>
           </div>
           <p class="status-line" id="search-status"></p>
           <div id="food-preview"></div>
           <div id="food-results"></div>
         </section>
 
+        <section id="view-recipes" data-view-panel="recipes" hidden>
+          <div class="page-heading">
+            <h1>Recipes</h1>
+            <p class="lede">Search with the bar above, set a quantity and unit for each food, then save the recipe or add it to a meal.</p>
+          </div>
+          <div class="recipe-layout">
+            <section class="meal-card">
+              <div class="meal-head">
+                <h2>Recipe builder</h2>
+              </div>
+              <p class="basis-note">1 tsp ≈ 5 g, 1 Tbsp ≈ 15 g, 1/4 cup ≈ 60 g, 1/2 cup ≈ 120 g, 1 cup ≈ 240 g, 1 oz ≈ 28.35 g, 1 lb ≈ 453.6 g.</p>
+              <div id="recipe-results"></div>
+              <div id="recipe-lines"></div>
+              <form id="recipe-save-form" class="exercise-form recipe-save">
+                <label>Recipe name
+                  <input id="recipe-name" type="text" placeholder="Recipe name" autocomplete="off">
+                </label>
+                <button type="submit" class="primary" id="recipe-save-button">Save recipe</button>
+                <button type="button" class="ghost" id="recipe-cancel" hidden>Cancel</button>
+              </form>
+            </section>
+            <aside id="recipe-totals" aria-label="Recipe totals"></aside>
+          </div>
+          <section class="meal-card saved-recipes">
+            <div class="meal-head">
+              <h2>Saved recipes</h2>
+            </div>
+            <p class="muted" id="recipe-day"></p>
+            <div id="recipe-list"></div>
+          </section>
+        </section>
+
         <section id="view-goals" data-view-panel="goals" hidden>
           <div class="page-heading">
             <h1>Dietary Goals</h1>
-            <p class="lede">Daily targets for the diary and week. The starting numbers follow common U.S. Daily Values for a 2,000 kcal diet.</p>
+            <p class="lede">The calorie goal comes from the calculator below. Protein, carbs, fat, fiber, and sodium stay editable.</p>
           </div>
+          <section class="goal-card">
+            <h2>BMR calculator</h2>
+            <p class="muted">Mifflin–St Jeor. Saving uses BMR, or TDEE when an activity level is selected, as the diary calorie goal.</p>
+            <form id="bmr-form">
+              <div class="goal-grid">
+                <label>Weight
+                  <span class="unit-field">
+                    <input id="bmr-weight" type="number" min="0" step="any" inputmode="decimal" aria-label="Weight">
+                    <select id="bmr-weight-unit" aria-label="Weight unit">
+                      <option value="lb">lb</option>
+                      <option value="kg">kg</option>
+                    </select>
+                  </span>
+                </label>
+                <label>Height
+                  <span class="unit-field">
+                    <input id="bmr-height" type="number" min="0" step="any" inputmode="decimal" aria-label="Height">
+                    <select id="bmr-height-unit" aria-label="Height unit">
+                      <option value="in">in</option>
+                      <option value="cm">cm</option>
+                    </select>
+                  </span>
+                </label>
+                <label>Age
+                  <input id="bmr-age" type="number" min="1" max="120" step="1" aria-label="Age">
+                </label>
+                <label>Sex
+                  <select id="bmr-sex" aria-label="Sex">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                </label>
+                <label>Activity
+                  <select id="bmr-activity" aria-label="Activity level">
+                    <option value="">BMR only</option>
+                    <option value="1.2">1.2 Sedentary</option>
+                    <option value="1.375">1.375 Lightly active</option>
+                    <option value="1.55">1.55 Moderately active</option>
+                    <option value="1.725">1.725 Active</option>
+                    <option value="1.9">1.9 Very active</option>
+                  </select>
+                </label>
+                <div class="bmr-actions">
+                  <button type="submit" class="primary">Use as calorie goal</button>
+                </div>
+              </div>
+            </form>
+            <p id="bmr-result" class="bmr-result" aria-live="polite"></p>
+          </section>
           <form class="goal-card" id="goals-form">
+            <h2>Daily targets</h2>
+            <p id="calorie-goal-line" class="bmr-result"></p>
+            <button type="button" class="ghost" id="fill-macros">Fill protein, carbs, and fat</button>
+            <p class="muted">Uses 20% protein, 50% carbs, and 30% fat from the calorie goal. You can edit the numbers after.</p>
             <div class="goal-grid" id="goal-fields"></div>
           </form>
         </section>
@@ -767,6 +1230,26 @@
   <script>
     const API_KEY = "NPWwkKcLJJ6fjPWfD9CmCCJRT8NgNCfJbJRndL9B";
     const STORAGE_KEY = "meal-builder-diary-v1";
+    const RECIPE_KEY = "recipes";
+
+    // Kitchen weights. Volume units follow the common water-weight chart.
+    const RECIPE_UNITS = [
+      { id: "tsp", label: "tsp", grams: 5 },
+      { id: "tbsp", label: "Tbsp", grams: 15 },
+      { id: "cup14", label: "1/4 cup", grams: 60 },
+      { id: "cup12", label: "1/2 cup", grams: 120 },
+      { id: "cup", label: "1 cup", grams: 240 },
+      { id: "oz", label: "oz", grams: 28.35 },
+      { id: "lb", label: "lb", grams: 453.6 },
+      { id: "g", label: "g", grams: 1 }
+    ];
+
+    const ACTIVITIES = [
+      { id: "walk", name: "Walk", met: 3.5 },
+      { id: "run", name: "Run", met: 9.8 },
+      { id: "cycle", name: "Cycle", met: 8 },
+      { id: "weights", name: "Weights", met: 5 }
+    ];
 
     // USDA food details report each nutrient per 100 g. Logged weight scales them.
     const MEALS = [
@@ -774,6 +1257,15 @@
       { id: "lunch", label: "Lunch" },
       { id: "dinner", label: "Dinner" },
       { id: "snack", label: "Snacks" }
+    ];
+
+    const ACTIVITY_LEVELS = [
+      { value: "", factor: 1 },
+      { value: "1.2", factor: 1.2 },
+      { value: "1.375", factor: 1.375 },
+      { value: "1.55", factor: 1.55 },
+      { value: "1.725", factor: 1.725 },
+      { value: "1.9", factor: 1.9 }
     ];
 
     const GOAL_FIELDS = [
@@ -793,6 +1285,19 @@
     let preview = null;
     let mealFoods = [];
     let expandedFoodId = null;
+    let recipes = loadRecipes();
+    let recipeDraft = [];
+    let openRecipeId = null;
+    let recipeAddId = null;
+    const recipeScales = {};
+    let addPromptFdc = null;
+    let queuedMeal = null;
+    let quickMeal = null;
+    let sideMonth = null;
+    let editingRecipeId = null;
+    let nutrientsOpen = false;
+    let undoFn = null;
+    let undoTimer = 0;
     let searchResult = { query: "", foods: [], totalHits: 0, error: "", loading: false };
     let toastTimer = 0;
 
@@ -809,7 +1314,20 @@
           fiber: 28,
           sodium: 2300
         },
+        bmr: defaultBmr(),
         days: {}
+      };
+    }
+
+    function defaultBmr() {
+      return {
+        weight: "",
+        weightUnit: "lb",
+        height: "",
+        heightUnit: "in",
+        age: "",
+        sex: "male",
+        activity: ""
       };
     }
 
@@ -822,6 +1340,7 @@
         fresh.targetMeal = MEALS.some((meal) => meal.id === saved.targetMeal) ? saved.targetMeal : fresh.targetMeal;
         fresh.groups = { ...fresh.groups, ...(saved.groups || {}) };
         fresh.goals = { ...fresh.goals, ...(saved.goals || {}) };
+        fresh.bmr = normalizeBmr(saved.bmr);
         fresh.days = saved.days && typeof saved.days === "object" ? saved.days : {};
       } catch (error) {
         console.error(error);
@@ -831,6 +1350,60 @@
 
     function saveState() {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function loadRecipes() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(RECIPE_KEY) || "null");
+        if (!Array.isArray(saved)) return [];
+        return saved.filter((recipe) => recipe && typeof recipe.name === "string" && Array.isArray(recipe.ingredients));
+      } catch (error) {
+        console.error(error);
+        return [];
+      }
+    }
+
+    function saveRecipes() {
+      localStorage.setItem(RECIPE_KEY, JSON.stringify(recipes));
+    }
+
+    function unitById(unitId) {
+      return RECIPE_UNITS.find((unit) => unit.id === unitId) || RECIPE_UNITS[RECIPE_UNITS.length - 1];
+    }
+
+    function lineGrams(line) {
+      const quantity = Number(line.quantity);
+      if (!(quantity > 0)) return 0;
+      return quantity * unitById(line.unit).grams;
+    }
+
+    function formatGrams(value) {
+      if (!Number.isFinite(value)) return "—";
+      return value.toLocaleString(undefined, { maximumFractionDigits: 2 });
+    }
+
+    function lineAmountLabel(line) {
+      const unit = unitById(line.unit);
+      const quantity = Number(line.quantity);
+      const qtyText = Number.isFinite(quantity)
+        ? quantity.toLocaleString(undefined, { maximumFractionDigits: 2 })
+        : "0";
+      const grams = Number(line.grams) > 0 ? Number(line.grams) : lineGrams(line);
+      return qtyText + " " + unit.label + " · " + formatGrams(grams) + " g";
+    }
+
+    function draftEntries() {
+      return recipeDraft
+        .filter((line) => line.status !== "loading")
+        .map((line) => ({ ...line, grams: lineGrams(line) }));
+    }
+
+    function scaledEntries(recipe, scale) {
+      const factor = Number(scale) > 0 ? Number(scale) : 0;
+      return (recipe.ingredients || []).map((line) => ({
+        ...line,
+        grams: (Number(line.grams) > 0 ? Number(line.grams) : lineGrams(line)) * factor
+      }));
     }
 
     function newId() {
@@ -919,7 +1492,24 @@
       MEALS.forEach((meal) => {
         if (!Array.isArray(state.days[iso][meal.id])) state.days[iso][meal.id] = [];
       });
+      if (!Array.isArray(state.days[iso].exercise)) state.days[iso].exercise = [];
       return state.days[iso];
+    }
+
+    function exerciseEntries(iso) {
+      const day = state.days[iso];
+      return day && Array.isArray(day.exercise) ? day.exercise : [];
+    }
+
+    function exerciseCalories(iso) {
+      return exerciseEntries(iso).reduce((sum, item) => sum + (Number(item.calories) || 0), 0);
+    }
+
+    function amountLabel(entry) {
+      const grams = Number(entry.grams) || 0;
+      const portion = (entry.portions || []).find((item) => Math.abs(item.grams - grams) < 0.05);
+      const weight = formatNumber(grams, "g") + " g";
+      return portion ? portion.label + " · " + weight : weight;
     }
 
     function dayEntries(iso) {
@@ -983,6 +1573,25 @@
         seen.add(key);
         return true;
       });
+    }
+
+    function preferredPortion(portions, description) {
+      if (!portions.length) return null;
+      const firstWord = String(description || "").toLowerCase().split(/[^a-z]+/).find((word) => word.length > 2) || "";
+      const score = (portion) => {
+        const label = portion.label.toLowerCase();
+        let value = 0;
+        if (/\b(mashed|sliced|diced|chopped|crushed|pureed|puree|dried|dehydrated|cooked|baked|boiled|fried|roasted|stewed)\b/.test(label)) value += 50;
+        if (/\b(cup|tbsp|tablespoon|tsp|teaspoon|ounce|oz|fl oz|ml|liter|pint|quart)\b/.test(label)) value += 18;
+        if (/\b(inch|linear|not specified|quantity)\b/.test(label)) value += 30;
+        if (portion.grams < 15) value += 24;
+        if (portion.grams >= 40 && portion.grams <= 280) value -= 6;
+        if (firstWord && label.includes(firstWord)) value -= 36;
+        if (/\b(medium|small|large|piece|slice|item|serving|whole|fruit|breast|fillet|patty|link|egg|steak|chop|thigh|drumstick)\b/.test(label)) value -= 22;
+        if (/^1\b/.test(label.trim())) value -= 8;
+        return value;
+      };
+      return portions.slice().sort((a, b) => score(a) - score(b) || a.grams - b.grams)[0];
     }
 
     function entryFromDetail(detail, grams) {
@@ -1076,10 +1685,42 @@
     }
 
     function setStatus(message) {
+      undoFn = null;
+      clearTimeout(undoTimer);
       const toast = document.getElementById("status");
       toast.textContent = message;
       clearTimeout(toastTimer);
       if (message) toastTimer = setTimeout(() => { toast.textContent = ""; }, 2600);
+    }
+
+    function offerUndo(message, restore) {
+      undoFn = restore;
+      clearTimeout(toastTimer);
+      clearTimeout(undoTimer);
+      const toast = document.getElementById("status");
+      toast.innerHTML = "<span>" + escapeHtml(message) + "</span><button type=\"button\" class=\"ghost\" id=\"undo-button\">Undo</button>";
+      undoTimer = setTimeout(() => {
+        undoFn = null;
+        toast.textContent = "";
+      }, 6000);
+    }
+
+    function snapshotDay(iso) {
+      return JSON.parse(JSON.stringify(ensureDay(iso)));
+    }
+
+    function restoreDay(iso, snapshot) {
+      state.days[iso] = snapshot;
+      saveState();
+      renderDiary();
+      if (currentView() === "search") renderSearch();
+      if (currentView() === "recipes") renderRecipes();
+    }
+
+    function cloneEntry(entry) {
+      const copy = JSON.parse(JSON.stringify(entry));
+      copy.id = newId();
+      return copy;
     }
 
     function syncDateInput() {
@@ -1100,7 +1741,9 @@
       });
       if (view === "diary") renderDiary();
       if (view === "week") renderWeek();
+      if (view === "month") renderMonth();
       if (view === "search") renderSearch();
+      if (view === "recipes") renderRecipes();
       if (view === "goals") renderGoals();
       closeNavIfMobile();
     }
@@ -1133,10 +1776,12 @@
     function renderDiary() {
       const entries = dayEntries(state.date);
       const totals = aggregate(entries);
+      const burned = exerciseCalories(state.date);
       document.getElementById("day-title").textContent = formatLong(state.date);
       document.getElementById("day-stats").textContent =
         entries.length + (entries.length === 1 ? " food · " : " foods · ") +
-        formatNumber(totals.calories, "kcal") + " kcal";
+        formatNumber(totals.calories, "kcal") + " kcal eaten" +
+        (burned ? " · " + formatNumber(burned, "kcal") + " kcal exercise" : "");
 
       const day = ensureDay(state.date);
       document.getElementById("meal-list").innerHTML = MEALS.map((meal) => {
@@ -1152,31 +1797,46 @@
               "<span class=\"meal-kcal\" data-meal-total=\"" + meal.id + "\">" +
                 escapeHtml(formatNumber(mealTotals.calories, "kcal")) + " kcal</span></div>" +
               "<button type=\"button\" class=\"primary\" data-action=\"add-to-meal\" data-meal=\"" + meal.id + "\">Add food</button>" +
-            "</div>" + items +
+            "</div>" + items + recentHtml(meal.id) +
           "</section>"
         );
-      }).join("");
+      }).join("") + exerciseHtml(day.exercise);
+      renderDiaryCalendar();
       renderSummary();
       syncDateInput();
     }
 
+    function portionOptionsHtml(portions, grams, description) {
+      const preferred = preferredPortion(portions, description || "");
+      const preferLabel = preferred && Math.abs(preferred.grams - grams) < 0.05 ? preferred.label : "";
+      let chosen = false;
+      return ["<option value=\"\">Custom weight</option>"].concat(portions.map((portion) => {
+        const match = Math.abs(portion.grams - grams) < 0.05 && (!preferLabel || portion.label === preferLabel);
+        const selected = match && !chosen;
+        if (selected) chosen = true;
+        return "<option value=\"" + portion.grams + "\"" + (selected ? " selected" : "") + ">" + escapeHtml(portion.label) + "</option>";
+      })).join("");
+    }
+
     function entryHtml(entry) {
-      const portionOptions = ["<option value=\"\">Custom weight</option>"]
-        .concat(entry.portions.map((portion) => {
-          const selected = Math.abs(portion.grams - entry.grams) < 0.05 ? " selected" : "";
-          return "<option value=\"" + portion.grams + "\"" + selected + ">" + escapeHtml(portion.label) + "</option>";
-        }))
-        .join("");
+      const portionOptions = portionOptionsHtml(entry.portions, entry.grams, entry.description);
       const mealOptions = MEALS.map((meal) => {
         const selected = entryMealId(entry.id) === meal.id ? " selected" : "";
         return "<option value=\"" + meal.id + "\"" + selected + ">" + meal.label + "</option>";
       }).join("");
       const meta = [entry.brandName, entry.dataType].filter(Boolean).join(" · ");
+      const totals = aggregate([entry]);
       return (
         "<article class=\"entry\" data-entry-id=\"" + escapeHtml(entry.id) + "\">" +
-          "<div class=\"entry-top\">" +
+          "<div class=\"log-line\">" +
             "<div><h3>" + escapeHtml(entry.description) + "</h3>" +
-            (meta ? "<p class=\"muted\">" + escapeHtml(meta) + "</p>" : "") + "</div>" +
+            (meta ? "<p class=\"muted\">" + escapeHtml(meta) + "</p>" : "") +
+            "<p class=\"macro-line\" data-entry-macros=\"" + escapeHtml(entry.id) + "\">" + macroHtml(totals) + "</p></div>" +
+            "<span class=\"log-amount\" data-entry-amount=\"" + escapeHtml(entry.id) + "\">" + escapeHtml(amountLabel(entry)) + "</span>" +
+            "<strong class=\"log-kcal\" data-entry-kcal=\"" + escapeHtml(entry.id) + "\">" + escapeHtml(formatNumber(totals.calories, "kcal")) + " kcal</strong>" +
+          "</div>" +
+          "<div class=\"entry-top\">" +
+            "<span></span>" +
             "<button type=\"button\" class=\"ghost\" data-action=\"remove-entry\" data-entry-id=\"" + escapeHtml(entry.id) + "\">Remove</button>" +
           "</div>" +
           "<div class=\"entry-controls\">" +
@@ -1186,12 +1846,96 @@
               : "") +
             "<label>Weight (g)<input data-action=\"entry-grams\" data-entry-id=\"" + escapeHtml(entry.id) + "\" type=\"number\" min=\"0\" step=\"any\" value=\"" + escapeHtml(entry.grams) + "\"></label>" +
           "</div>" +
-          "<p class=\"macro-line\" data-entry-macros=\"" + escapeHtml(entry.id) + "\">" + macroHtml(aggregate([{ ...entry }])) + "</p>" +
           "<details class=\"nutrient-details\"><summary>All nutrients</summary>" +
             "<div data-entry-nutrients=\"" + escapeHtml(entry.id) + "\">" + tableHtml(nutrientRows(entry, entry.grams)) + "</div>" +
           "</details>" +
         "</article>"
       );
+    }
+
+    function bodyWeightKg() {
+      const saved = normalizeBmr(state.bmr);
+      const weight = Number(saved.weight);
+      if (!(weight > 0)) return 70;
+      return saved.weightUnit === "kg" ? weight : weight * 0.45359237;
+    }
+
+    function recentFoods(mealId) {
+      const dates = Object.keys(state.days).sort().reverse();
+      const seen = new Set();
+      const todayIds = new Set(((state.days[state.date] || {})[mealId] || []).map((entry) => String(entry.fdcId || entry.description)));
+      const items = [];
+      dates.forEach((date) => {
+        const list = (state.days[date] && state.days[date][mealId]) || [];
+        list.slice().reverse().forEach((entry) => {
+          const key = String(entry.fdcId || entry.description);
+          if (seen.has(key) || (date === state.date && todayIds.has(key))) return;
+          seen.add(key);
+          items.push({ entry: entry, date: date });
+        });
+      });
+      return items.slice(0, 4);
+    }
+
+    function recentHtml(mealId) {
+      const yesterday = ((state.days[addDays(state.date, -1)] || {})[mealId]) || [];
+      const recent = recentFoods(mealId);
+      if (!yesterday.length && !recent.length) return "";
+      const copy = yesterday.length
+        ? "<button type=\"button\" class=\"ghost\" data-action=\"copy-yesterday\" data-meal=\"" + mealId + "\">Copy yesterday</button>"
+        : "";
+      const chips = recent.map((item) => (
+        "<button type=\"button\" class=\"choice\" data-action=\"repeat-food\" data-meal=\"" + mealId +
+        "\" data-source-date=\"" + item.date + "\" data-entry-id=\"" + escapeHtml(item.entry.id) + "\">" +
+        escapeHtml(item.entry.description) + " · " + escapeHtml(amountLabel(item.entry)) + "</button>"
+      )).join("");
+      return "<div class=\"recent-foods\">" + copy + chips + "</div>";
+    }
+
+    function exerciseHtml(items) {
+      const rows = items.length
+        ? items.map((item) => (
+          "<div class=\"log-line exercise-row\">" +
+            "<div><h3>" + escapeHtml(item.name) + "</h3></div>" +
+            "<span class=\"log-amount\">" + escapeHtml(formatNumber(item.minutes, "g")) + " min</span>" +
+            "<strong class=\"log-kcal burn\">−" + escapeHtml(formatNumber(item.calories, "kcal")) + " kcal</strong>" +
+            "<button type=\"button\" class=\"ghost\" data-action=\"remove-exercise\" data-exercise-id=\"" + escapeHtml(item.id) + "\">Remove</button>" +
+          "</div>"
+        )).join("")
+        : "<p class=\"empty-meal\">No exercise logged.</p>";
+      const options = ["<option value=\"\">Choose an activity</option>"]
+        .concat(ACTIVITIES.map((activity) => "<option value=\"" + activity.id + "\">" + activity.name + "</option>"))
+        .join("");
+      const hasWeight = Number(normalizeBmr(state.bmr).weight) > 0;
+      return (
+        "<section class=\"meal-card exercise\">" +
+          "<div class=\"meal-head\"><div class=\"meal-title\"><h2>Exercise</h2></div></div>" +
+          rows +
+          "<div class=\"exercise-form\">" +
+            "<label>Activity<select id=\"exercise-activity\" aria-label=\"Activity list\">" + options + "</select></label>" +
+            "<input id=\"exercise-name\" type=\"text\" placeholder=\"Activity\" aria-label=\"Activity\">" +
+            "<input id=\"exercise-minutes\" type=\"number\" min=\"1\" step=\"1\" placeholder=\"Minutes\" aria-label=\"Minutes\">" +
+            "<input id=\"exercise-calories\" type=\"number\" min=\"1\" step=\"1\" placeholder=\"Calories burned\" aria-label=\"Calories burned\">" +
+            "<button type=\"button\" class=\"primary\" data-action=\"add-exercise\">Add exercise</button>" +
+          "</div>" +
+          "<p class=\"muted\">" + (hasWeight
+            ? "Calories fill from the activity, minutes, and the weight saved in Dietary Goals. You can still edit them."
+            : "Calories fill from the activity and minutes using 70 kg. Save a weight in Dietary Goals for your own estimate.") + "</p>" +
+        "</section>"
+      );
+    }
+
+    function estimateExercise() {
+      const select = document.getElementById("exercise-activity");
+      if (!select) return;
+      const activity = ACTIVITIES.find((item) => item.id === select.value);
+      if (!activity) return;
+      const name = document.getElementById("exercise-name");
+      if (name && !name.dataset.edited) name.value = activity.name;
+      const minutes = Number(document.getElementById("exercise-minutes").value);
+      if (!(minutes > 0)) return;
+      const calories = Math.max(1, Math.round(activity.met * bodyWeightKg() * (minutes / 60)));
+      document.getElementById("exercise-calories").value = String(calories);
     }
 
     function entryMealId(entryId) {
@@ -1200,13 +1944,51 @@
       return match ? match.id : state.targetMeal;
     }
 
+    function nutrientCategory(nutrient) {
+      const name = String(nutrient.name || "").toLowerCase();
+      if (/vitamin|thiamin|riboflavin|niacin|folate|folic|choline|biotin|pantothenic|retinol|carotene|tocopherol|cryptoxanthin|lycopene|lutein|phylloquinone|cobalamin|pyridoxine/.test(name)) {
+        return "Vitamins";
+      }
+      if (/calcium|iron|magnesium|phosphorus|potassium|sodium|zinc|copper|manganese|selenium|chromium|fluoride|iodine|molybdenum|chloride/.test(name)) {
+        return "Minerals";
+      }
+      return "Nutrients";
+    }
+
+    function renderNutrientBoard() {
+      const board = document.getElementById("nutrient-board");
+      if (!board) return;
+      const rows = aggregate(dayEntries(state.date)).rows.filter((nutrient) => nutrient.amount > 0);
+      const groups = { Vitamins: [], Minerals: [], Nutrients: [] };
+      rows.forEach((nutrient) => {
+        groups[nutrientCategory(nutrient)].push(nutrient);
+      });
+      board.innerHTML =
+        "<details class=\"nutrient-board-details\"" + (nutrientsOpen ? " open" : "") + ">" +
+        "<summary><h2>Daily nutrients</h2></summary>" +
+        "<div class=\"nutrient-columns\">" +
+        ["Vitamins", "Minerals", "Nutrients"].map((group) => {
+          const lines = groups[group].length
+            ? groups[group].map((nutrient) => (
+              "<div class=\"nutrient-line\"><span>" + escapeHtml(nutrient.name) + "</span><strong>" +
+              escapeHtml(formatAmount(nutrient.amount, nutrient.unit)) + "</strong></div>"
+            )).join("")
+            : "<p class=\"muted\">None from today's foods yet.</p>";
+          return "<section><h3>" + group + "</h3>" + lines + "</section>";
+        }).join("") +
+        "</div></details>";
+      const details = board.querySelector("details");
+      if (details) details.addEventListener("toggle", () => { nutrientsOpen = details.open; });
+    }
+
     function renderSummary() {
       const root = document.getElementById("meal-summary");
-      const wasOpen = document.getElementById("day-nutrient-details")?.open;
       const totals = aggregate(dayEntries(state.date));
+      const burned = exerciseCalories(state.date);
+      const net = totals.calories - burned;
       const calorieGoal = goalValue("calories");
-      const caloriePercent = calorieGoal > 0 ? Math.min(100, (totals.calories / calorieGoal) * 100) : 0;
-      const calorieOver = calorieGoal > 0 && totals.calories > calorieGoal;
+      const caloriePercent = calorieGoal > 0 ? Math.min(100, (Math.max(net, 0) / calorieGoal) * 100) : 0;
+      const calorieOver = calorieGoal > 0 && net > calorieGoal;
       const goalRows = GOAL_FIELDS.filter((field) => field.id !== "calories").map((field) => {
         const value = macroValue(totals, field.id);
         const goal = goalValue(field.id);
@@ -1223,23 +2005,20 @@
 
       root.innerHTML =
         "<h2>Daily totals</h2>" +
-        "<p class=\"calorie-total\"><span class=\"value\" id=\"total-calories\">" + escapeHtml(formatNumber(totals.calories, "kcal")) + "</span><span class=\"unit\">kcal</span></p>" +
-        "<p class=\"goal-note\">of " + escapeHtml(formatNumber(calorieGoal, "kcal")) + " kcal</p>" +
+        "<p class=\"calorie-total\"><span class=\"value\" id=\"total-calories\">" + escapeHtml(formatNumber(net, "kcal")) + "</span><span class=\"unit\">of " + escapeHtml(formatNumber(calorieGoal, "kcal")) + " kcal</span></p>" +
+        "<p class=\"goal-note\">" + escapeHtml(formatNumber(totals.calories, "kcal")) + " eaten · " +
+          escapeHtml(formatNumber(burned, "kcal")) + " exercise</p>" +
         "<div class=\"bar" + (calorieOver ? " is-over" : "") + "\"><span style=\"width:" + caloriePercent + "%\"></span></div>" +
         "<ul class=\"goal-list\">" + goalRows + "</ul>" +
-        "<details class=\"nutrient-details\" id=\"day-nutrient-details\">" +
-          "<summary>All nutrients</summary>" + tableHtml(totals.rows) +
-        "</details>" +
         "<p class=\"basis-note\">Amounts come from USDA FoodData Central per 100 g, then scale to the weight you enter.</p>";
 
-      if (wasOpen) {
-        const details = document.getElementById("day-nutrient-details");
-        if (details) details.open = true;
-      }
+      renderNutrientBoard();
       const stats = document.getElementById("day-stats");
       if (stats && currentView() === "diary") {
         const count = dayEntries(state.date).length;
-        stats.textContent = count + (count === 1 ? " food · " : " foods · ") + formatNumber(totals.calories, "kcal") + " kcal";
+        stats.textContent = count + (count === 1 ? " food · " : " foods · ") +
+          formatNumber(totals.calories, "kcal") + " kcal eaten" +
+          (burned ? " · " + formatNumber(burned, "kcal") + " kcal exercise" : "");
       }
     }
 
@@ -1250,6 +2029,10 @@
       const totals = aggregate([{ ...entry, grams: grams }]);
       if (macros) macros.innerHTML = macroHtml(totals);
       if (nutrients) nutrients.innerHTML = tableHtml(nutrientRows(entry, grams));
+      const amount = document.querySelector('[data-entry-amount="' + CSS.escape(entry.id) + '"]');
+      const kcal = document.querySelector('[data-entry-kcal="' + CSS.escape(entry.id) + '"]');
+      if (amount) amount.textContent = amountLabel({ ...entry, grams: grams });
+      if (kcal) kcal.textContent = formatNumber(totals.calories, "kcal") + " kcal";
       MEALS.forEach((meal) => {
         const badge = document.querySelector('[data-meal-total="' + meal.id + '"]');
         if (!badge) return;
@@ -1298,13 +2081,136 @@
       syncDateInput();
     }
 
+    function dayIsTracked(iso) {
+      return dayEntries(iso).length > 0 || exerciseEntries(iso).length > 0;
+    }
+
+    function renderDiaryCalendar() {
+      const selected = parseIso(state.date);
+      const year = sideMonth ? sideMonth.year : selected.getFullYear();
+      const month = sideMonth ? sideMonth.month : selected.getMonth();
+      const first = new Date(year, month, 1);
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const gridStart = new Date(year, month, 1 - first.getDay());
+      const cellCount = Math.ceil((first.getDay() + daysInMonth) / 7) * 7;
+      const today = isoDate(new Date());
+      const weekdays = ["S", "M", "T", "W", "T", "F", "S"]
+        .map((name) => "<div class=\"side-cal-weekday\">" + name + "</div>")
+        .join("");
+      const cells = Array.from({ length: cellCount }, (_, index) => {
+        const date = new Date(gridStart);
+        date.setDate(gridStart.getDate() + index);
+        const iso = isoDate(date);
+        const inMonth = date.getMonth() === month;
+        const tracked = dayIsTracked(iso);
+        const calories = tracked ? aggregate(dayEntries(iso)).calories : 0;
+        const classes = [
+          "side-day",
+          inMonth ? "" : "is-outside",
+          iso === state.date ? "is-selected" : "",
+          iso === today ? "is-today" : "",
+          tracked ? "is-tracked" : ""
+        ].filter(Boolean).join(" ");
+        const label = date.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" }) +
+          (tracked ? ", " + formatNumber(calories, "kcal") + " calories logged" : ", nothing logged");
+        return (
+          "<button type=\"button\" class=\"" + classes + "\" data-action=\"open-day\" data-date=\"" + iso + "\" aria-label=\"" + escapeHtml(label) + "\">" +
+            "<span>" + date.getDate() + "</span>" +
+            "<span class=\"side-dot\" aria-hidden=\"true\"></span>" +
+          "</button>"
+        );
+      }).join("");
+      document.getElementById("diary-calendar").innerHTML =
+        "<div class=\"side-cal-head\">" +
+          "<h2>" + escapeHtml(first.toLocaleDateString(undefined, { month: "long", year: "numeric" })) + "</h2>" +
+          "<div class=\"side-cal-nav\">" +
+            "<button type=\"button\" class=\"ghost\" data-action=\"side-month\" data-offset=\"-1\" aria-label=\"Previous month\">←</button>" +
+            "<button type=\"button\" class=\"ghost\" data-action=\"side-month\" data-offset=\"1\" aria-label=\"Next month\">→</button>" +
+          "</div>" +
+        "</div>" +
+        "<div class=\"side-cal-grid\">" + weekdays + cells + "</div>" +
+        "<p class=\"side-cal-key\"><i aria-hidden=\"true\"></i> Food or exercise logged</p>";
+    }
+
+    function shiftMonth(offset) {
+      const date = parseIso(state.date);
+      const day = date.getDate();
+      date.setDate(1);
+      date.setMonth(date.getMonth() + offset);
+      const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+      date.setDate(Math.min(day, lastDay));
+      state.date = isoDate(date);
+      saveState();
+      refreshCurrentView();
+    }
+
+    function renderMonth() {
+      const selected = parseIso(state.date);
+      const year = selected.getFullYear();
+      const month = selected.getMonth();
+      const first = new Date(year, month, 1);
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const gridStart = new Date(year, month, 1 - first.getDay());
+      const cellCount = Math.ceil((first.getDay() + daysInMonth) / 7) * 7;
+      const today = isoDate(new Date());
+      const monthDays = Array.from({ length: daysInMonth }, (_, index) => isoDate(new Date(year, month, index + 1)));
+      const loggedDays = monthDays.filter((iso) => dayEntries(iso).length);
+      const monthTotals = aggregate(loggedDays.flatMap((iso) => dayEntries(iso)));
+
+      document.getElementById("month-title").textContent = first.toLocaleDateString(undefined, {
+        month: "long",
+        year: "numeric"
+      });
+      document.getElementById("month-summary").innerHTML =
+        "<span>Logged days <strong>" + loggedDays.length + "</strong></span>" +
+        "<span>Month <strong>" + escapeHtml(formatNumber(monthTotals.calories, "kcal")) + " kcal</strong></span>";
+
+      const weekdayHeaders = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+        .map((name) => "<div class=\"month-weekday\">" + name + "</div>")
+        .join("");
+      const cells = Array.from({ length: cellCount }, (_, index) => {
+        const date = new Date(gridStart);
+        date.setDate(gridStart.getDate() + index);
+        const iso = isoDate(date);
+        const inMonth = date.getMonth() === month;
+        const entries = dayEntries(iso);
+        const logged = entries.length > 0;
+        const calories = logged ? aggregate(entries).calories : 0;
+        const classes = [
+          "month-day",
+          inMonth ? "" : "is-outside",
+          iso === state.date ? "is-selected" : "",
+          iso === today ? "is-today" : ""
+        ].filter(Boolean).join(" ");
+        const label = date.toLocaleDateString(undefined, { month: "long", day: "numeric" }) +
+          (logged ? ", " + formatNumber(calories, "kcal") + " calories" : ", no foods logged");
+        return (
+          "<button type=\"button\" class=\"" + classes + "\" data-action=\"open-day\" data-date=\"" + iso + "\" aria-label=\"" + escapeHtml(label) + "\">" +
+            "<span class=\"month-num\">" + date.getDate() + "</span>" +
+            "<span class=\"month-kcal\">" + (logged ? escapeHtml(formatNumber(calories, "kcal")) : "") + "</span>" +
+            (logged ? "<span class=\"month-mark\" aria-hidden=\"true\"></span>" : "") +
+          "</button>"
+        );
+      }).join("");
+
+      document.getElementById("month-board").innerHTML = weekdayHeaders + cells;
+      syncDateInput();
+    }
+
+    function mealChoiceHtml(action, extra) {
+      return "<div class=\"meal-choices\">" + MEALS.map((meal) => (
+        "<button type=\"button\" class=\"choice" + (meal.id === quickMeal ? " is-active" : "") + "\" data-action=\"" + action + "\" data-meal=\"" + meal.id + "\"" +
+        (extra || "") + ">" + meal.label + "</button>"
+      )).join("") + "</div>";
+    }
+
+    function searchContextText() {
+      if (quickMeal) return "Adding to " + mealLabel(quickMeal) + " for " + formatLong(state.date) + ".";
+      return "Logging for " + formatLong(state.date) + ".";
+    }
+
     function renderSearch() {
-      document.getElementById("search-context").textContent =
-        "Adding to " + mealLabel(state.targetMeal) + " · " + formatLong(state.date);
-      document.getElementById("meal-choices").innerHTML = MEALS.map((meal) => (
-        "<button type=\"button\" class=\"choice" + (meal.id === state.targetMeal ? " is-active" : "") +
-        "\" data-action=\"choose-meal\" data-meal-choice=\"" + meal.id + "\">" + meal.label + "</button>"
-      )).join("");
+      document.getElementById("search-context").textContent = searchContextText();
       renderPreview();
       renderResults();
       syncDateInput();
@@ -1327,12 +2233,7 @@
         return;
       }
       const entry = preview.entry;
-      const portionOptions = ["<option value=\"\">Custom weight</option>"]
-        .concat(entry.portions.map((portion) => (
-          "<option value=\"" + portion.grams + "\"" +
-          (Math.abs(portion.grams - preview.grams) < 0.05 ? " selected" : "") + ">" +
-          escapeHtml(portion.label) + "</option>"
-        ))).join("");
+      const portionOptions = portionOptionsHtml(entry.portions, preview.grams, entry.description);
       const meta = [entry.brandName, entry.dataType].filter(Boolean).join(" · ");
       root.innerHTML =
         "<section class=\"preview-card\">" +
@@ -1343,8 +2244,12 @@
               ? "<label>Portion<select id=\"preview-portion\">" + portionOptions + "</select></label>"
               : "") +
             "<label>Weight (g)<input id=\"preview-grams\" type=\"number\" min=\"0\" step=\"any\" value=\"" + escapeHtml(preview.grams) + "\"></label>" +
-            "<button type=\"button\" class=\"primary\" id=\"preview-add\" data-action=\"commit-preview\">Add to " + escapeHtml(mealLabel(preview.meal)) + "</button>" +
           "</div>" +
+          "<div class=\"add-meals\">" +
+            (quickMeal
+              ? "<button type=\"button\" class=\"primary\" data-action=\"commit-preview\" data-meal=\"" + quickMeal + "\">Add to " + mealLabel(quickMeal) + "</button><p class=\"muted\">Or choose another meal</p>"
+              : "<p class=\"muted\">Add to</p>") +
+            mealChoiceHtml("commit-preview") + "</div>" +
           "<div id=\"food-preview-figures\">" + previewFiguresHtml() + "</div>" +
         "</section>";
     }
@@ -1360,8 +2265,6 @@
     function paintPreview() {
       const figures = document.getElementById("food-preview-figures");
       if (figures && preview && preview.status === "ready") figures.innerHTML = previewFiguresHtml();
-      const add = document.getElementById("preview-add");
-      if (add && preview) add.textContent = "Add to " + mealLabel(preview.meal);
     }
 
     function nutrientValue(food, ids) {
@@ -1396,7 +2299,7 @@
       });
     }
 
-    function foodCardHtml(food) {
+    function foodCardHtml(food, mode) {
       const raw = searchResult.foods.find((item) => item.fdcId === food.fdcId) || { foodNutrients: [] };
       const open = String(expandedFoodId) === String(food.fdcId);
       const extras = extraNutrients(raw);
@@ -1421,61 +2324,517 @@
           (open
             ? "<div class=\"food-extra\"><p class=\"muted\">More nutrients from this search result</p>" +
               "<div class=\"nutrient-scroll\"><table class=\"nutrient-table\"><tbody>" + detailRows + "</tbody></table></div>" +
-              "<button type=\"button\" class=\"primary\" data-action=\"select-food\" data-fdc-id=\"" + food.fdcId + "\">Add to " + escapeHtml(mealLabel(state.targetMeal)) + "</button></div>"
+              (mode === "recipe"
+                ? "<button type=\"button\" class=\"primary\" data-action=\"add-recipe-food\" data-fdc-id=\"" + food.fdcId + "\">Add to recipe</button>"
+                : (quickMeal
+                    ? "<button type=\"button\" class=\"primary\" data-action=\"add-food-meal\" data-meal=\"" + quickMeal + "\" data-fdc-id=\"" + food.fdcId + "\">Add to " + mealLabel(quickMeal) + "</button>" +
+                      "<button type=\"button\" class=\"text-button\" data-action=\"show-add-meals\" data-fdc-id=\"" + food.fdcId + "\">Other meal</button>"
+                    : "<button type=\"button\" class=\"primary\" data-action=\"show-add-meals\" data-fdc-id=\"" + food.fdcId + "\">Add to meal</button>") +
+                  (String(addPromptFdc) === String(food.fdcId)
+                    ? "<div class=\"add-meals\"><p class=\"muted\">Choose a meal</p>" +
+                      mealChoiceHtml("add-food-meal", " data-fdc-id=\"" + food.fdcId + "\"") + "</div>"
+                    : "")) +
+              "</div>"
             : "") +
         "</article>"
       );
     }
 
+    function foodResultsBody(mode) {
+      if (searchResult.loading) return "<p class=\"results-message\">Searching USDA…</p>";
+      if (searchResult.error) return "<p class=\"results-message\">" + escapeHtml(searchResult.error) + "</p>";
+      if (!searchResult.query) return "<p class=\"results-message\">Search for a food and press Enter.</p>";
+      if (!mealFoods.length) return "<p class=\"results-message\">No foods found for “" + escapeHtml(searchResult.query) + "”.</p>";
+      return "<div class=\"food-grid\">" + mealFoods.map((food) => foodCardHtml(food, mode)).join("") + "</div>";
+    }
+
     function renderResults() {
       const status = document.getElementById("search-status");
       const results = document.getElementById("food-results");
-      if (searchResult.loading) {
-        status.textContent = "";
-        results.innerHTML = "<p class=\"results-message\">Searching USDA…</p>";
+      const ready = !searchResult.loading && !searchResult.error && searchResult.query && mealFoods.length;
+      status.textContent = ready
+        ? searchResult.totalHits.toLocaleString() + " foods match. Showing " + mealFoods.length + "."
+        : "";
+      results.innerHTML = foodResultsBody("meal");
+    }
+
+    function renderRecipeResults() {
+      const root = document.getElementById("recipe-results");
+      if (!root) return;
+      const ready = !searchResult.loading && !searchResult.error && searchResult.query && mealFoods.length;
+      const count = ready
+        ? "<p class=\"status-line\">" + searchResult.totalHits.toLocaleString() + " foods match. Showing " + mealFoods.length + ".</p>"
+        : "";
+      root.innerHTML = count + foodResultsBody("recipe");
+    }
+
+    function unitOptions(selected) {
+      return RECIPE_UNITS.map((unit) => (
+        "<option value=\"" + unit.id + "\"" + (unit.id === selected ? " selected" : "") + ">" +
+        escapeHtml(unit.label) + "</option>"
+      )).join("");
+    }
+
+    function recipeTotalsHtml(entries) {
+      const totals = aggregate(entries);
+      return "<h2>Recipe totals</h2>" +
+        "<p class=\"calorie-total\"><span class=\"value\">" + escapeHtml(formatNumber(totals.calories, "kcal")) +
+        "</span><span class=\"unit\">kcal</span></p>" +
+        "<ul class=\"goal-list\">" +
+          "<li><div class=\"goal-top\"><span>Protein</span><strong>" + escapeHtml(formatAmount(totals.protein, "g")) + "</strong></div></li>" +
+          "<li><div class=\"goal-top\"><span>Carbs</span><strong>" + escapeHtml(formatAmount(totals.carbs, "g")) + "</strong></div></li>" +
+          "<li><div class=\"goal-top\"><span>Fat</span><strong>" + escapeHtml(formatAmount(totals.fat, "g")) + "</strong></div></li>" +
+        "</ul>";
+    }
+
+    function renderRecipeLines() {
+      const root = document.getElementById("recipe-lines");
+      if (!root) return;
+      if (!recipeDraft.length) {
+        root.innerHTML = "<p class=\"empty-meal\">No foods in this recipe yet.</p>";
         return;
       }
-      if (searchResult.error) {
-        status.textContent = "";
-        results.innerHTML = "<p class=\"results-message\">" + escapeHtml(searchResult.error) + "</p>";
+      root.innerHTML = recipeDraft.map((line) => {
+        if (line.status === "loading") {
+          return "<article class=\"recipe-line\"><h3>" + escapeHtml(line.description) +
+            "</h3><p class=\"muted\">Fetching nutrients from USDA…</p></article>";
+        }
+        const grams = lineGrams(line);
+        const totals = aggregate([{ ...line, grams: grams }]);
+        const meta = [line.brandName, line.dataType].filter(Boolean).join(" · ");
+        return (
+          "<article class=\"recipe-line\">" +
+            "<div class=\"entry-top\">" +
+              "<h3>" + escapeHtml(line.description) + "</h3>" +
+              "<button type=\"button\" class=\"text-button\" data-action=\"remove-recipe-line\" data-line-id=\"" + escapeHtml(line.id) + "\">Remove</button>" +
+            "</div>" +
+            (meta ? "<p class=\"muted\">" + escapeHtml(meta) + "</p>" : "") +
+            "<div class=\"entry-controls\">" +
+              "<label>Quantity<input data-action=\"recipe-qty\" data-line-id=\"" + escapeHtml(line.id) + "\" type=\"number\" min=\"0\" step=\"any\" value=\"" + escapeHtml(line.quantity) + "\"></label>" +
+              "<label>Unit<select data-action=\"recipe-unit\" data-line-id=\"" + escapeHtml(line.id) + "\">" + unitOptions(line.unit) + "</select></label>" +
+            "</div>" +
+            "<p class=\"log-amount\" data-line-grams=\"" + escapeHtml(line.id) + "\">" + escapeHtml(formatGrams(grams)) + " g</p>" +
+            "<p class=\"macro-line\" data-line-macros=\"" + escapeHtml(line.id) + "\">" + macroHtml(totals) + "</p>" +
+          "</article>"
+        );
+      }).join("");
+    }
+
+    function renderRecipeTotals() {
+      const root = document.getElementById("recipe-totals");
+      if (!root) return;
+      root.innerHTML = recipeTotalsHtml(draftEntries());
+    }
+
+    function paintRecipeLine(line) {
+      const grams = lineGrams(line);
+      const gramsEl = document.querySelector("[data-line-grams=\"" + line.id + "\"]");
+      const macrosEl = document.querySelector("[data-line-macros=\"" + line.id + "\"]");
+      if (gramsEl) gramsEl.textContent = formatGrams(grams) + " g";
+      if (macrosEl) macrosEl.innerHTML = macroHtml(aggregate([{ ...line, grams: grams }]));
+      renderRecipeTotals();
+    }
+
+    function recipeScaleChoice(recipeId) {
+      const value = Number(recipeScales[recipeId]);
+      return Number.isFinite(value) && value >= 0 ? value : 1;
+    }
+
+    function renderRecipeList() {
+      const root = document.getElementById("recipe-list");
+      const day = document.getElementById("recipe-day");
+      if (day) day.textContent = "Adds to " + formatLong(state.date) + ".";
+      if (!root) return;
+      if (!recipes.length) {
+        root.innerHTML = "<p class=\"empty-meal\">No saved recipes yet.</p>";
         return;
       }
-      if (!searchResult.query) {
-        status.textContent = "";
-        results.innerHTML = "<p class=\"results-message\">Search for a food and press Enter.</p>";
+      root.innerHTML = recipes.map((recipe) => {
+        const open = openRecipeId === recipe.id;
+        const totals = aggregate(scaledEntries(recipe, 1));
+        const scale = recipeScaleChoice(recipe.id);
+        const scaled = aggregate(scaledEntries(recipe, scale));
+        const picking = recipeAddId === recipe.id;
+        const ingredients = (recipe.ingredients || []).map((line) => (
+          "<li><span>" + escapeHtml(line.description) + "</span><span>" + escapeHtml(lineAmountLabel(line)) + "</span></li>"
+        )).join("");
+        return (
+          "<article class=\"food-card" + (open ? " is-open" : "") + "\">" +
+            "<button type=\"button\" class=\"food-card-toggle\" data-action=\"toggle-recipe\" data-recipe-id=\"" + escapeHtml(recipe.id) + "\" aria-expanded=\"" + (open ? "true" : "false") + "\">" +
+              "<h3>" + escapeHtml(recipe.name) + "</h3>" +
+              "<p class=\"brand\">" + recipe.ingredients.length + " food" + (recipe.ingredients.length === 1 ? "" : "s") +
+              " · " + escapeHtml(formatAmount(totals.calories, "kcal")) + "</p>" +
+            "</button>" +
+            (open
+              ? "<div class=\"food-extra\">" +
+                  "<ul class=\"recipe-ingredients\">" + ingredients + "</ul>" +
+                  "<div class=\"entry-controls\">" +
+                    "<label>Scale<input data-action=\"recipe-scale\" data-recipe-id=\"" + escapeHtml(recipe.id) + "\" type=\"number\" min=\"0\" step=\"any\" value=\"" + escapeHtml(scale) + "\"></label>" +
+                  "</div>" +
+                  "<p class=\"macro-line\" data-recipe-preview=\"" + escapeHtml(recipe.id) + "\">" + macroHtml(scaled) + "</p>" +
+                  "<button type=\"button\" class=\"primary\" data-action=\"show-recipe-meals\" data-recipe-id=\"" + escapeHtml(recipe.id) + "\">Add to meal</button>" +
+                  (picking
+                    ? "<div class=\"add-meals\"><p class=\"muted\">Choose a meal</p>" +
+                      mealChoiceHtml("log-recipe", " data-recipe-id=\"" + escapeHtml(recipe.id) + "\"") + "</div>"
+                    : "") +
+                  "<button type=\"button\" class=\"text-button\" data-action=\"edit-recipe\" data-recipe-id=\"" + escapeHtml(recipe.id) + "\">Edit</button>" +
+                  "<button type=\"button\" class=\"text-button\" data-action=\"remove-recipe\" data-recipe-id=\"" + escapeHtml(recipe.id) + "\">Remove</button>" +
+                "</div>"
+              : "") +
+          "</article>"
+        );
+      }).join("");
+    }
+
+    function renderRecipes() {
+      renderRecipeResults();
+      renderRecipeLines();
+      renderRecipeTotals();
+      renderRecipeList();
+      syncRecipeForm();
+      syncDateInput();
+    }
+
+    function paintRecipePreview(recipeId) {
+      const recipe = recipes.find((item) => item.id === recipeId);
+      const preview = document.querySelector("[data-recipe-preview=\"" + recipeId + "\"]");
+      if (!recipe || !preview) return;
+      preview.innerHTML = macroHtml(aggregate(scaledEntries(recipe, recipeScaleChoice(recipeId))));
+    }
+
+    async function addFoodToRecipe(fdcId) {
+      const summary = searchResult.foods.find((food) => String(food.fdcId) === String(fdcId));
+      if (!summary) return;
+      const lineId = newId();
+      recipeDraft.push({
+        id: lineId,
+        fdcId: summary.fdcId,
+        description: summary.description || "Food",
+        brandName: summary.brandName || summary.brandOwner || "",
+        dataType: summary.dataType || "",
+        quantity: 1,
+        unit: "g",
+        nutrients: [],
+        status: "loading"
+      });
+      renderRecipeLines();
+      try {
+        const response = await fetch("https://api.nal.usda.gov/fdc/v1/food/" + summary.fdcId + "?api_key=" + API_KEY);
+        if (!response.ok) throw new Error("USDA food lookup failed (" + response.status + ").");
+        const detail = await response.json();
+        const entry = entryFromDetail(detail, 1);
+        const line = recipeDraft.find((item) => item.id === lineId);
+        if (!line) return;
+        line.description = entry.description;
+        line.brandName = entry.brandName;
+        line.dataType = entry.dataType;
+        line.nutrients = entry.nutrients;
+        line.status = "ready";
+        renderRecipeLines();
+        renderRecipeTotals();
+        const input = document.querySelector("[data-action=\"recipe-qty\"][data-line-id=\"" + lineId + "\"]");
+        if (input) input.focus();
+      } catch (error) {
+        console.error(error);
+        recipeDraft = recipeDraft.filter((item) => item.id !== lineId);
+        renderRecipeLines();
+        renderRecipeTotals();
+        setStatus("Couldn't load nutrients for this food. Try another result.");
+      }
+    }
+
+    function syncRecipeForm() {
+      const button = document.getElementById("recipe-save-button");
+      const cancel = document.getElementById("recipe-cancel");
+      if (button) button.textContent = editingRecipeId ? "Update recipe" : "Save recipe";
+      if (cancel) cancel.hidden = !editingRecipeId;
+    }
+
+    function editRecipe(recipeId) {
+      const recipe = recipes.find((item) => item.id === recipeId);
+      if (!recipe) return;
+      editingRecipeId = recipe.id;
+      recipeDraft = (recipe.ingredients || []).map((line) => ({
+        id: line.id || newId(),
+        fdcId: line.fdcId,
+        description: line.description,
+        brandName: line.brandName || "",
+        dataType: line.dataType || "",
+        quantity: Number(line.quantity) || 0,
+        unit: line.unit || "g",
+        nutrients: JSON.parse(JSON.stringify(line.nutrients || [])),
+        status: "ready"
+      }));
+      document.getElementById("recipe-name").value = recipe.name;
+      syncRecipeForm();
+      renderRecipeLines();
+      renderRecipeTotals();
+      document.getElementById("recipe-name").focus();
+    }
+
+    function cancelRecipeEdit() {
+      editingRecipeId = null;
+      recipeDraft = [];
+      const name = document.getElementById("recipe-name");
+      if (name) name.value = "";
+      syncRecipeForm();
+      renderRecipeLines();
+      renderRecipeTotals();
+    }
+
+    function saveRecipe(name) {
+      const trimmed = name.trim();
+      if (!trimmed) {
+        setStatus("Name the recipe before saving.");
         return;
       }
-      if (!mealFoods.length) {
-        status.textContent = "";
-        results.innerHTML = "<p class=\"results-message\">No foods found for “" + escapeHtml(searchResult.query) + "”.</p>";
+      if (recipeDraft.some((line) => line.status === "loading")) {
+        setStatus("Wait for the food nutrients to finish loading.");
         return;
       }
-      status.textContent = searchResult.totalHits.toLocaleString() + " foods match. Showing " + mealFoods.length + ".";
-      results.innerHTML = "<div class=\"food-grid\">" + mealFoods.map(foodCardHtml).join("") + "</div>";
+      const ingredients = recipeDraft
+        .map((line) => ({
+          id: line.id,
+          fdcId: line.fdcId,
+          description: line.description,
+          brandName: line.brandName || "",
+          dataType: line.dataType || "",
+          quantity: Number(line.quantity) || 0,
+          unit: unitById(line.unit).id,
+          grams: lineGrams(line),
+          nutrients: line.nutrients || []
+        }))
+        .filter((line) => line.grams > 0);
+      if (!ingredients.length) {
+        setStatus("Add a food and a quantity above 0.");
+        return;
+      }
+      const existing = editingRecipeId ? recipes.find((recipe) => recipe.id === editingRecipeId) : null;
+      if (existing) {
+        existing.name = trimmed;
+        existing.ingredients = ingredients;
+      } else {
+        recipes.push({ id: newId(), name: trimmed, ingredients: ingredients });
+      }
+      saveRecipes();
+      editingRecipeId = null;
+      recipeDraft = [];
+      document.getElementById("recipe-name").value = "";
+      syncRecipeForm();
+      renderRecipeLines();
+      renderRecipeTotals();
+      renderRecipeList();
+      setStatus((existing ? "Updated " : "Saved ") + trimmed + ".");
+    }
+
+    function logRecipe(recipeId, mealId) {
+      const recipe = recipes.find((item) => item.id === recipeId);
+      if (!recipe) return;
+      const meal = MEALS.some((item) => item.id === mealId) ? mealId : "";
+      if (!meal) return;
+      const scale = recipeScaleChoice(recipeId);
+      if (!(scale > 0)) {
+        setStatus("Enter a scale above 0.");
+        return;
+      }
+      const entries = scaledEntries(recipe, scale).filter((line) => line.grams > 0);
+      if (!entries.length) {
+        setStatus("This recipe has no amounts to add.");
+        return;
+      }
+      const iso = state.date;
+      const before = snapshotDay(iso);
+      const day = ensureDay(iso);
+      entries.forEach((line) => {
+        day[meal].push({
+          id: newId(),
+          fdcId: line.fdcId,
+          description: line.description,
+          brandName: line.brandName || "",
+          dataType: line.dataType || "",
+          grams: line.grams,
+          portions: [],
+          nutrients: JSON.parse(JSON.stringify(line.nutrients || []))
+        });
+      });
+      saveState();
+      recipeAddId = null;
+      renderDiary();
+      renderRecipeList();
+      offerUndo(recipe.name + " added to " + mealLabel(meal) + ".", () => restoreDay(iso, before));
+    }
+
+    function normalizeBmr(saved) {
+      const bmr = { ...defaultBmr(), ...(saved && typeof saved === "object" ? saved : {}) };
+      bmr.weightUnit = bmr.weightUnit === "kg" ? "kg" : "lb";
+      bmr.heightUnit = bmr.heightUnit === "cm" ? "cm" : "in";
+      bmr.sex = bmr.sex === "female" ? "female" : "male";
+      bmr.activity = ACTIVITY_LEVELS.some((level) => level.value === String(bmr.activity)) ? String(bmr.activity) : "";
+      bmr.weight = bmr.weight === 0 ? "0" : (bmr.weight ? String(bmr.weight) : "");
+      bmr.height = bmr.height === 0 ? "0" : (bmr.height ? String(bmr.height) : "");
+      bmr.age = bmr.age === 0 ? "0" : (bmr.age ? String(bmr.age) : "");
+      return bmr;
+    }
+
+    function readBmrForm() {
+      return {
+        weight: document.getElementById("bmr-weight").value.trim(),
+        weightUnit: document.getElementById("bmr-weight-unit").value,
+        height: document.getElementById("bmr-height").value.trim(),
+        heightUnit: document.getElementById("bmr-height-unit").value,
+        age: document.getElementById("bmr-age").value.trim(),
+        sex: document.getElementById("bmr-sex").value === "female" ? "female" : "male",
+        activity: document.getElementById("bmr-activity").value
+      };
+    }
+
+    function fillBmrForm() {
+      const bmr = normalizeBmr(state.bmr);
+      document.getElementById("bmr-weight").value = bmr.weight;
+      document.getElementById("bmr-weight-unit").value = bmr.weightUnit;
+      document.getElementById("bmr-height").value = bmr.height;
+      document.getElementById("bmr-height-unit").value = bmr.heightUnit;
+      document.getElementById("bmr-age").value = bmr.age;
+      document.getElementById("bmr-sex").value = bmr.sex;
+      document.getElementById("bmr-activity").value = bmr.activity;
+    }
+
+    // Mifflin–St Jeor. Weight and height are converted to kg and cm first.
+    function calculateEnergy(input) {
+      const weight = Number(input.weight);
+      const height = Number(input.height);
+      const age = Number(input.age);
+      if (!(weight > 0) || !(height > 0) || !(age > 0)) return null;
+      const kg = input.weightUnit === "kg" ? weight : weight * 0.45359237;
+      const cm = input.heightUnit === "cm" ? height : height * 2.54;
+      const bmr = 10 * kg + 6.25 * cm - 5 * age + (input.sex === "female" ? -161 : 5);
+      const level = ACTIVITY_LEVELS.find((item) => item.value === input.activity) || ACTIVITY_LEVELS[0];
+      return {
+        bmr: bmr,
+        factor: level.factor,
+        target: Math.round(bmr * level.factor)
+      };
+    }
+
+    function paintBmrResult() {
+      const node = document.getElementById("bmr-result");
+      if (!node) return;
+      const result = calculateEnergy(readBmrForm());
+      if (!result) {
+        node.textContent = "Diary calorie goal is " + formatNumber(goalValue("calories"), "kcal") + " kcal.";
+        return;
+      }
+      if (result.factor === 1) {
+        node.textContent = "BMR " + formatNumber(result.target, "kcal") + " kcal";
+      } else {
+        node.textContent = "TDEE " + formatNumber(result.target, "kcal") + " kcal (BMR " +
+          formatNumber(result.bmr, "kcal") + " × " + result.factor + ")";
+      }
+    }
+
+    function applyCalorieTarget(event) {
+      event.preventDefault();
+      const input = readBmrForm();
+      const result = calculateEnergy(input);
+      if (!result) {
+        setStatus("Enter weight, height, and age.");
+        paintBmrResult();
+        return;
+      }
+      state.bmr = input;
+      state.goals.calories = result.target;
+      saveState();
+      renderGoals();
+      renderSummary();
+      const label = result.factor === 1 ? "BMR" : "TDEE";
+      setStatus(label + " " + formatNumber(result.target, "kcal") + " kcal saved as the calorie goal.");
+    }
+
+    function fillMacrosFromCalories() {
+      const calories = goalValue("calories");
+      state.goals.protein = Math.round(calories * 0.2 / 4);
+      state.goals.carbs = Math.round(calories * 0.5 / 4);
+      state.goals.fat = Math.round(calories * 0.3 / 9);
+      saveState();
+      renderGoals();
+      renderSummary();
+      setStatus("Protein, carbs, and fat filled from " + formatNumber(calories, "kcal") + " kcal.");
     }
 
     function renderGoals() {
-      document.getElementById("goal-fields").innerHTML = GOAL_FIELDS.map((field) => (
+      const line = document.getElementById("calorie-goal-line");
+      if (line) line.textContent = "Calorie goal: " + formatNumber(goalValue("calories"), "kcal") + " kcal";
+      document.getElementById("goal-fields").innerHTML = GOAL_FIELDS.filter((field) => field.id !== "calories").map((field) => (
         "<label>" + field.label + " (" + field.unit + ")" +
           "<input type=\"number\" min=\"0\" step=\"any\" data-field=\"" + field.id + "\" value=\"" + escapeHtml(goalValue(field.id)) + "\">" +
         "</label>"
       )).join("");
+      fillBmrForm();
+      paintBmrResult();
       syncDateInput();
     }
 
+    function rankFoods(foods, query) {
+      const q = query.trim().toLowerCase();
+      const typeRank = (food) => {
+        const type = food.dataType || "";
+        if (type === "Survey (FNDDS)" || type === "Foundation") return 0;
+        if (type === "SR Legacy") return 1;
+        return 2;
+      };
+      const nameRank = (food) => {
+        const desc = String(food.description || "").toLowerCase();
+        if (desc === q) return 0;
+        if (desc.startsWith(q)) return 1;
+        if (desc.includes(q)) return 2;
+        return 3;
+      };
+      return foods.slice().sort((a, b) => typeRank(a) - typeRank(b) || nameRank(a) - nameRank(b));
+    }
+
+    function saveLastSearch() {
+      try {
+        sessionStorage.setItem("meal-builder-last-search", JSON.stringify({
+          query: searchResult.query,
+          result: searchResult,
+          mealFoods: mealFoods
+        }));
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    function restoreLastSearch() {
+      try {
+        const saved = JSON.parse(sessionStorage.getItem("meal-builder-last-search") || "null");
+        if (!saved || !saved.query || !saved.result) return;
+        searchResult = saved.result;
+        mealFoods = Array.isArray(saved.mealFoods) ? saved.mealFoods : [];
+        const input = document.getElementById("food-search");
+        if (input && !input.value) input.value = saved.query;
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
     async function runSearch(query) {
+      const forRecipe = currentView() === "recipes";
       const trimmed = query.trim();
       searchResult = { query: trimmed, foods: [], totalHits: 0, error: "", loading: true };
-      setView("search");
+      addPromptFdc = null;
+      queuedMeal = null;
+      if (forRecipe) renderRecipeResults();
+      else setView("search");
       if (!trimmed) {
         searchResult.loading = false;
         renderResults();
+        if (forRecipe) renderRecipeResults();
         return;
       }
       const seq = ++searchSeq;
-      let url = "https://api.nal.usda.gov/fdc/v1/foods/search?api_key=" + API_KEY +
-        "&query=" + encodeURIComponent(trimmed) + "&pageSize=8";
       const dataType = document.getElementById("data-type").value;
+      let url = "https://api.nal.usda.gov/fdc/v1/foods/search?api_key=" + API_KEY +
+        "&query=" + encodeURIComponent(trimmed) + "&pageSize=" + (dataType ? "8" : "25");
       if (dataType) url += "&dataType=" + encodeURIComponent(dataType);
       try {
         const response = await fetch(url);
@@ -1483,16 +2842,18 @@
         const data = await response.json();
         if (seq !== searchSeq) return;
         console.log(data);
-        mealFoods = buildMealFoods(data.foods || []);
+        const ranked = rankFoods(data.foods || [], trimmed).slice(0, 8);
+        mealFoods = buildMealFoods(ranked);
         console.log(mealFoods);
         expandedFoodId = null;
         searchResult = {
           query: trimmed,
-          foods: data.foods || [],
+          foods: ranked,
           totalHits: data.totalHits || 0,
           error: "",
           loading: false
         };
+        saveLastSearch();
       } catch (error) {
         if (seq !== searchSeq) return;
         console.error(error);
@@ -1501,6 +2862,7 @@
         searchResult = { query: trimmed, foods: [], totalHits: 0, error: "The USDA search didn't respond. Try again.", loading: false };
       }
       renderResults();
+      if (forRecipe) renderRecipeResults();
     }
 
     async function selectFood(fdcId) {
@@ -1511,7 +2873,6 @@
         status: "loading",
         fdcId: summary.fdcId,
         description: summary.description,
-        meal: state.targetMeal,
         grams: 100,
         entry: null,
         error: ""
@@ -1524,12 +2885,12 @@
         const detail = await response.json();
         if (seq !== previewSeq) return;
         const entry = entryFromDetail(detail, 100);
+        const portion = preferredPortion(entry.portions, entry.description);
         preview = {
           status: "ready",
           fdcId: summary.fdcId,
           description: entry.description,
-          meal: state.targetMeal,
-          grams: entry.portions[0] ? entry.portions[0].grams : 100,
+          grams: portion ? portion.grams : 100,
           entry: entry,
           error: ""
         };
@@ -1542,12 +2903,21 @@
       }
       renderPreview();
       renderResults();
+      if (queuedMeal && preview.status === "ready") {
+        const meal = queuedMeal;
+        queuedMeal = null;
+        commitPreview(meal);
+        return;
+      }
+      if (preview.status === "error") queuedMeal = null;
       const weight = document.getElementById("preview-grams");
       if (weight) weight.focus();
     }
 
-    function commitPreview() {
+    function commitPreview(mealId) {
       if (!preview || preview.status !== "ready") return;
+      const meal = MEALS.some((item) => item.id === mealId) ? mealId : "";
+      if (!meal) return;
       const grams = Number(preview.grams);
       if (!(grams > 0)) {
         setStatus("Enter a weight above 0 g.");
@@ -1556,14 +2926,19 @@
       const entry = JSON.parse(JSON.stringify(preview.entry));
       entry.id = newId();
       entry.grams = grams;
-      ensureDay(state.date)[preview.meal].push(entry);
-      state.targetMeal = preview.meal;
+      const iso = state.date;
+      const before = snapshotDay(iso);
+      ensureDay(iso)[meal].push(entry);
       saveState();
-      setStatus("Added to " + mealLabel(preview.meal) + ".");
-      setView("diary");
+      queuedMeal = null;
+      renderDiary();
+      if (currentView() !== "search") setView("search");
+      else renderSearch();
+      offerUndo("Added to " + mealLabel(meal) + ".", () => restoreDay(iso, before));
     }
 
     function shiftDate(days) {
+      sideMonth = null;
       state.date = addDays(state.date, days);
       saveState();
       refreshCurrentView();
@@ -1573,10 +2948,12 @@
       const view = currentView();
       if (view === "diary") renderDiary();
       else if (view === "week") renderWeek();
+      else if (view === "month") renderMonth();
+      else if (view === "recipes") renderRecipes();
+      else if (view === "goals") renderGoals();
       else renderSearch();
       if (view === "search") {
-        document.getElementById("search-context").textContent =
-          "Adding to " + mealLabel(state.targetMeal) + " · " + formatLong(state.date);
+        document.getElementById("search-context").textContent = searchContextText();
       }
     }
 
@@ -1585,10 +2962,18 @@
       runSearch(document.getElementById("food-search").value);
     });
 
+    document.getElementById("recipe-save-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      saveRecipe(document.getElementById("recipe-name").value);
+    });
+
     document.getElementById("goals-form").addEventListener("submit", (event) => event.preventDefault());
+    document.getElementById("bmr-form").addEventListener("submit", applyCalorieTarget);
+    document.getElementById("bmr-form").addEventListener("input", paintBmrResult);
 
     document.getElementById("date-input").addEventListener("change", (event) => {
       if (!event.target.value) return;
+      sideMonth = null;
       state.date = event.target.value;
       saveState();
       refreshCurrentView();
@@ -1599,21 +2984,90 @@
       if (query) runSearch(query);
     });
 
-    document.getElementById("date-prev").addEventListener("click", () => shiftDate(currentView() === "week" ? -7 : -1));
-    document.getElementById("date-next").addEventListener("click", () => shiftDate(currentView() === "week" ? 7 : 1));
+    document.getElementById("date-prev").addEventListener("click", () => {
+      const view = currentView();
+      if (view === "week") shiftDate(-7);
+      else if (view === "month") shiftMonth(-1);
+      else shiftDate(-1);
+    });
+    document.getElementById("date-next").addEventListener("click", () => {
+      const view = currentView();
+      if (view === "week") shiftDate(7);
+      else if (view === "month") shiftMonth(1);
+      else shiftDate(1);
+    });
     document.getElementById("date-today").addEventListener("click", () => {
+      sideMonth = null;
       state.date = isoDate(new Date());
       saveState();
       refreshCurrentView();
     });
     document.getElementById("week-prev").addEventListener("click", () => shiftDate(-7));
     document.getElementById("week-next").addEventListener("click", () => shiftDate(7));
+    document.getElementById("month-prev").addEventListener("click", () => shiftMonth(-1));
+    document.getElementById("month-next").addEventListener("click", () => shiftMonth(1));
+
+    function exportData() {
+      const payload = { diary: state, recipes: recipes };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "meal-builder-backup.json";
+      link.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function importData(file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const payload = JSON.parse(String(reader.result || ""));
+          const diary = payload && payload.diary ? payload.diary : payload;
+          if (!diary || typeof diary !== "object" || (!diary.days && !diary.goals)) throw new Error("Unrecognized backup.");
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(diary));
+          if (Array.isArray(payload.recipes)) localStorage.setItem(RECIPE_KEY, JSON.stringify(payload.recipes));
+          const next = loadState();
+          Object.keys(state).forEach((key) => delete state[key]);
+          Object.assign(state, next);
+          recipes = loadRecipes();
+          recipeDraft = [];
+          editingRecipeId = null;
+          setView(currentView());
+          setStatus("Backup imported.");
+        } catch (error) {
+          console.error(error);
+          setStatus("That file isn't a Meal Builder backup.");
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    document.getElementById("export-data").addEventListener("click", exportData);
+    document.getElementById("import-data").addEventListener("change", (event) => {
+      const file = event.target.files && event.target.files[0];
+      event.target.value = "";
+      if (file) importData(file);
+    });
+    document.getElementById("fill-macros").addEventListener("click", fillMacrosFromCalories);
+    document.getElementById("recipe-cancel").addEventListener("click", cancelRecipeEdit);
 
     document.addEventListener("click", (event) => {
+      if (event.target.id === "undo-button") {
+        const restore = undoFn;
+        undoFn = null;
+        clearTimeout(undoTimer);
+        document.getElementById("status").textContent = "";
+        if (restore) restore();
+        return;
+      }
       const action = event.target.closest("[data-action]");
       if (!action) {
         const viewButton = event.target.closest("[data-view]");
-        if (viewButton) setView(viewButton.dataset.view);
+        if (viewButton) {
+          if (viewButton.dataset.view === "search") quickMeal = null;
+          setView(viewButton.dataset.view);
+        }
         return;
       }
       const name = action.dataset.action;
@@ -1625,47 +3079,165 @@
         applyGroups();
       }
       if (name === "add-to-meal") {
-        state.targetMeal = action.dataset.meal;
-        if (preview) preview.meal = state.targetMeal;
-        saveState();
+        quickMeal = action.dataset.meal;
         setView("search");
         document.getElementById("food-search").focus();
       }
-      if (name === "choose-meal") {
-        state.targetMeal = action.dataset.mealChoice;
-        if (preview) preview.meal = state.targetMeal;
+      if (name === "copy-yesterday") {
+        const mealId = action.dataset.meal;
+        const source = ((state.days[addDays(state.date, -1)] || {})[mealId]) || [];
+        if (!source.length) {
+          setStatus("Nothing in " + mealLabel(mealId) + " yesterday.");
+          return;
+        }
+        const iso = state.date;
+        const before = snapshotDay(iso);
+        source.forEach((entry) => ensureDay(iso)[mealId].push(cloneEntry(entry)));
         saveState();
-        document.querySelectorAll("[data-meal-choice]").forEach((button) => {
-          button.classList.toggle("is-active", button.dataset.mealChoice === state.targetMeal);
-        });
-        paintPreview();
-        document.getElementById("search-context").textContent =
-          "Adding to " + mealLabel(state.targetMeal) + " · " + formatLong(state.date);
+        renderDiary();
+        offerUndo("Copied yesterday's " + mealLabel(mealId).toLowerCase() + ".", () => restoreDay(iso, before));
+      }
+      if (name === "repeat-food") {
+        const sourceDay = state.days[action.dataset.sourceDate];
+        let source = null;
+        if (sourceDay) {
+          MEALS.forEach((meal) => {
+            const found = (sourceDay[meal.id] || []).find((entry) => entry.id === action.dataset.entryId);
+            if (found) source = found;
+          });
+        }
+        if (!source || !action.dataset.meal) return;
+        const iso = state.date;
+        const before = snapshotDay(iso);
+        ensureDay(iso)[action.dataset.meal].push(cloneEntry(source));
+        saveState();
+        renderDiary();
+        offerUndo(source.description + " added to " + mealLabel(action.dataset.meal) + ".", () => restoreDay(iso, before));
       }
       if (name === "toggle-food") {
         const id = action.dataset.fdcId;
         expandedFoodId = String(expandedFoodId) === String(id) ? null : id;
         renderResults();
+        if (currentView() === "recipes") renderRecipeResults();
+      }
+      if (name === "show-add-meals") {
+        addPromptFdc = action.dataset.fdcId;
+        expandedFoodId = action.dataset.fdcId;
+        queuedMeal = null;
+        if (preview && preview.status === "ready" && String(preview.fdcId) === String(action.dataset.fdcId)) {
+          renderResults();
+          if (currentView() === "recipes") renderRecipeResults();
+        } else {
+          selectFood(action.dataset.fdcId);
+        }
+      }
+      if (name === "add-food-meal") {
+        const meal = action.dataset.meal;
+        const id = action.dataset.fdcId;
+        if (preview && preview.status === "ready" && String(preview.fdcId) === String(id)) commitPreview(meal);
+        else {
+          queuedMeal = meal;
+          addPromptFdc = id;
+          if (!preview || String(preview.fdcId) !== String(id) || preview.status === "error") selectFood(id);
+        }
       }
       if (name === "select-food") selectFood(action.dataset.fdcId);
+      if (name === "add-recipe-food") addFoodToRecipe(action.dataset.fdcId);
+      if (name === "remove-recipe-line") {
+        recipeDraft = recipeDraft.filter((line) => line.id !== action.dataset.lineId);
+        renderRecipeLines();
+        renderRecipeTotals();
+      }
+      if (name === "toggle-recipe") {
+        const id = action.dataset.recipeId;
+        openRecipeId = openRecipeId === id ? null : id;
+        renderRecipeList();
+      }
+      if (name === "show-recipe-meals") {
+        const id = action.dataset.recipeId;
+        recipeAddId = recipeAddId === id ? null : id;
+        renderRecipeList();
+      }
+      if (name === "log-recipe") logRecipe(action.dataset.recipeId, action.dataset.meal);
+      if (name === "edit-recipe") editRecipe(action.dataset.recipeId);
+      if (name === "remove-recipe") {
+        const index = recipes.findIndex((recipe) => recipe.id === action.dataset.recipeId);
+        if (index < 0) return;
+        const removed = recipes[index];
+        recipes.splice(index, 1);
+        if (openRecipeId === removed.id) openRecipeId = null;
+        if (editingRecipeId === removed.id) cancelRecipeEdit();
+        saveRecipes();
+        renderRecipeList();
+        offerUndo("Removed " + removed.name + ".", () => {
+          recipes.splice(index, 0, removed);
+          saveRecipes();
+          renderRecipeList();
+        });
+      }
+      if (name === "add-exercise") {
+        const activity = document.getElementById("exercise-name").value.trim();
+        const minutes = Number(document.getElementById("exercise-minutes").value);
+        const calories = Number(document.getElementById("exercise-calories").value);
+        if (!activity || !(minutes > 0) || !(calories > 0)) {
+          setStatus("Enter an activity, minutes, and calories burned.");
+          return;
+        }
+        const iso = state.date;
+        const before = snapshotDay(iso);
+        ensureDay(iso).exercise.push({
+          id: newId(),
+          name: activity,
+          minutes: minutes,
+          calories: calories
+        });
+        saveState();
+        renderDiary();
+        offerUndo("Exercise added.", () => restoreDay(iso, before));
+      }
+      if (name === "remove-exercise") {
+        const iso = state.date;
+        const before = snapshotDay(iso);
+        const day = ensureDay(iso);
+        day.exercise = day.exercise.filter((item) => item.id !== action.dataset.exerciseId);
+        saveState();
+        renderDiary();
+        offerUndo("Exercise removed.", () => restoreDay(iso, before));
+      }
       if (name === "remove-entry") {
-        const day = ensureDay(state.date);
+        const iso = state.date;
+        const before = snapshotDay(iso);
+        const day = ensureDay(iso);
         MEALS.forEach((meal) => {
           day[meal.id] = day[meal.id].filter((entry) => entry.id !== action.dataset.entryId);
         });
         saveState();
         renderDiary();
+        offerUndo("Removed.", () => restoreDay(iso, before));
+      }
+      if (name === "side-month") {
+        const selected = parseIso(state.date);
+        const current = sideMonth || { year: selected.getFullYear(), month: selected.getMonth() };
+        const next = new Date(current.year, current.month + Number(action.dataset.offset), 1);
+        sideMonth = { year: next.getFullYear(), month: next.getMonth() };
+        renderDiaryCalendar();
       }
       if (name === "open-day") {
+        sideMonth = null;
         state.date = action.dataset.date;
         saveState();
         setView("diary");
       }
-      if (name === "commit-preview") commitPreview();
+      if (name === "commit-preview") commitPreview(action.dataset.meal);
     });
 
     document.addEventListener("input", (event) => {
       const target = event.target;
+      if (target.id === "exercise-name") target.dataset.edited = "1";
+      if (target.id === "exercise-minutes") {
+        estimateExercise();
+        return;
+      }
       if (target.id === "preview-grams" && preview && preview.status === "ready") {
         preview.grams = target.value === "" ? 0 : Number(target.value);
         const portion = document.getElementById("preview-portion");
@@ -1692,6 +3264,24 @@
         }
         return;
       }
+      if (target.dataset.action === "recipe-qty") {
+        const line = recipeDraft.find((item) => item.id === target.dataset.lineId);
+        if (!line) return;
+        const quantity = target.value === "" ? 0 : Number(target.value);
+        if (Number.isFinite(quantity) && quantity >= 0) {
+          line.quantity = quantity;
+          paintRecipeLine(line);
+        }
+        return;
+      }
+      if (target.dataset.action === "recipe-scale") {
+        const value = target.value === "" ? 0 : Number(target.value);
+        if (Number.isFinite(value) && value >= 0) {
+          recipeScales[target.dataset.recipeId] = value;
+          paintRecipePreview(target.dataset.recipeId);
+        }
+        return;
+      }
       if (target.dataset.field) {
         const value = Number(target.value);
         if (Number.isFinite(value) && value >= 0) {
@@ -1704,11 +3294,22 @@
 
     document.addEventListener("change", (event) => {
       const target = event.target;
+      if (target.id === "exercise-activity") {
+        const nameInput = document.getElementById("exercise-name");
+        if (nameInput) delete nameInput.dataset.edited;
+        estimateExercise();
+      }
       if (target.id === "preview-portion" && preview && preview.status === "ready" && target.value) {
         preview.grams = Number(target.value);
         const weight = document.getElementById("preview-grams");
         if (weight) weight.value = String(Math.round(preview.grams * 10) / 10);
         paintPreview();
+      }
+      if (target.dataset.action === "recipe-unit") {
+        const line = recipeDraft.find((item) => item.id === target.dataset.lineId);
+        if (!line) return;
+        line.unit = target.value;
+        paintRecipeLine(line);
       }
       if (target.dataset.action === "entry-portion" && target.value) {
         const entry = findEntry(target.dataset.entryId);
@@ -1732,6 +3333,7 @@
       }
     });
 
+    restoreLastSearch();
     applyGroups();
     syncDateInput();
     setView("diary");
